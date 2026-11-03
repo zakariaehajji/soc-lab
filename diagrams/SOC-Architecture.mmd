@@ -1,0 +1,23 @@
+flowchart LR
+  subgraph VMnet1["VMware VMnet1 — 192.168.221.0/24"]
+    KALI["Kali Linux<br/>192.168.221.30<br/>nmap / gobuster / ping"]
+    IDS["Ubuntu IDS<br/>192.168.221.136<br/>Suricata 8.0.7 on ens37<br/>Wazuh Agent 001"]
+    SOC["Ubuntu SOC<br/>192.168.221.138<br/>Wazuh Docker 4.14.9"]
+    WIN["Windows 11<br/>192.168.221.135"]
+  end
+
+  KALI -->|TCP/ICMP/HTTP lab traffic| IDS
+  IDS -->|eve.json via agent TCP/1514| SOC
+  SOC -->|Dashboard HTTPS/443<br/>API/55000 Indexer/9200| ANALYST["Analyst / Demo UI"]
+  WIN -.->|optional endpoint| SOC
+
+  subgraph PIPE["Detection pipeline"]
+    S["Suricata AF_PACKET"] --> E["eve.json"]
+    E --> A["wazuh-logcollector"]
+    A --> M["Wazuh Manager analysisd"]
+    M --> I["Wazuh Indexer"]
+    I --> D["Wazuh Dashboard"]
+  end
+
+  IDS --- PIPE
+  SOC --- PIPE

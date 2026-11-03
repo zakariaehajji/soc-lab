@@ -1,0 +1,16 @@
+[Unit]
+Description=SOC ML enrichment bridge (Indexer -> FastAPI)
+After=soc-ml.service
+Requires=soc-ml.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/soc-ml-engine
+EnvironmentFile=-/opt/soc-ml-engine/.env
+ExecStart=/opt/soc-ml-engine/.venv/bin/python -m src.bridge --interval 15
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

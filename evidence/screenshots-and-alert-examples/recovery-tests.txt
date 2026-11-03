@@ -1,0 +1,42 @@
+[sudo: authenticate] Password: 
+===== R1 wazuh-agent restart =====
+active
+2026/11/03 19:09:13 wazuh-agentd: WARNING: Unable to connect to any server.
+2026/11/03 19:09:13 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:23 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:33 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:43 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:39:43 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:39:53 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:40:03 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:41:47 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:41:49 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'.
+R1_TS=2026-11-03T19:41:43Z
+===== R2 suricata restart =====
+active
+R2_TS=2026-11-03T19:41:59Z
+===== R3 temporary network interruption to manager (block then unblock 1514) =====
+2026/11/03 19:09:23 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:33 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:43 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:39:43 wazuh-agentd: ERROR: (1137): Lost connection with manager. Setting lock.
+2026/11/03 19:39:43 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:39:53 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:40:03 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:41:47 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:09:03 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:03 wazuh-agentd: ERROR: (1208): Unable to connect to enrollment service at '[192.168.221.138]:1515'
+2026/11/03 19:09:13 wazuh-agentd: WARNING: Unable to connect to any server.
+2026/11/03 19:09:13 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:23 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:33 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:43 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:39:43 wazuh-agentd: ERROR: (1137): Lost connection with manager. Setting lock.
+2026/11/03 19:39:43 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:39:53 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:40:03 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:41:47 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+mgr_1514_ok
+active
+R3_TS=2026-11-03T19:42:07Z
+RECOVERY_DONE

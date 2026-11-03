@@ -1,0 +1,152 @@
+<!--
+  SOC Lab custom Wazuh rules
+  Parent Suricata alerts typically decode as rule 86601.
+  These child rules add classification and severity without replacing 86601.
+-->
+<group name="soc_lab,suricata,">
+
+  <rule id="100101" level="6">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible TCP SYN Scan from Kali</match>
+    <description>SOC-LAB: Nmap TCP SYN scan detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100102" level="6">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible TCP Connect Scan Probe from Kali</match>
+    <description>SOC-LAB: Nmap TCP connect-style scan detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100103" level="7">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible TCP NULL Scan from Kali</match>
+    <description>SOC-LAB: Nmap TCP NULL scan detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100104" level="7">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible TCP FIN Scan from Kali</match>
+    <description>SOC-LAB: Nmap TCP FIN scan detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100105" level="7">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible TCP Xmas Scan from Kali</match>
+    <description>SOC-LAB: Nmap TCP Xmas scan detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100106" level="6">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible Service Version Probe Burst from Kali</match>
+    <description>SOC-LAB: Service/version probe burst detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100107" level="6">
+    <if_sid>86601</if_sid>
+    <match>LOCAL SCAN Possible Common Port Sweep from Kali</match>
+    <description>SOC-LAB: Common port sweep detected via Suricata</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>recon,nmap,soc_nmap,</group>
+  </rule>
+
+  <rule id="100110" level="8">
+    <if_sid>86601</if_sid>
+    <match>LOCAL WEB Possible Directory Enumeration (Gobuster-like) from Kali</match>
+    <description>SOC-LAB: Web directory enumeration (Gobuster-like) detected</description>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+    <group>web,gobuster,soc_gobuster,</group>
+  </rule>
+
+  <rule id="100111" level="7">
+    <if_sid>86601</if_sid>
+    <match>LOCAL WEB Suspicious Common Path Probe from Kali</match>
+    <description>SOC-LAB: Suspicious web path probe (/admin) detected</description>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+    <group>web,gobuster,soc_gobuster,</group>
+  </rule>
+
+  <rule id="100112" level="8">
+    <if_sid>86601</if_sid>
+    <match>LOCAL WEB Suspicious Common Path Probe (.git) from Kali</match>
+    <description>SOC-LAB: Suspicious .git path probe detected</description>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+    <group>web,gobuster,soc_gobuster,</group>
+  </rule>
+
+  <rule id="100113" level="7">
+    <if_sid>86601</if_sid>
+    <match>LOCAL WEB High-Frequency HTTP Requests from Kali</match>
+    <description>SOC-LAB: High-frequency HTTP request burst detected</description>
+    <mitre>
+      <id>T1595</id>
+    </mitre>
+    <group>web,gobuster,soc_gobuster,</group>
+  </rule>
+
+  <rule id="100120" level="4">
+    <if_sid>86601</if_sid>
+    <match>LOCAL ICMP Echo Request from Kali</match>
+    <description>SOC-LAB: ICMP echo request from Kali (rate-limited)</description>
+    <group>icmp,soc_icmp,</group>
+  </rule>
+
+  <rule id="100121" level="6">
+    <if_sid>86601</if_sid>
+    <match>LOCAL ICMP Echo Burst / Ping Sweep from Kali</match>
+    <description>SOC-LAB: ICMP echo burst / ping sweep from Kali</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>icmp,soc_icmp,</group>
+  </rule>
+
+  <rule id="100122" level="5">
+    <if_sid>86601</if_sid>
+    <match>LOCAL ICMP Repeated Echo between Lab Hosts</match>
+    <description>SOC-LAB: Repeated ICMP echo between lab hosts</description>
+    <group>icmp,soc_icmp,</group>
+  </rule>
+
+  <rule id="100130" level="10" frequency="8" timeframe="120">
+    <if_matched_group>soc_nmap</if_matched_group>
+    <same_source_ip />
+    <description>SOC-LAB: High-volume network scanning correlation (multiple Nmap signatures)</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>correlation,soc_scan_burst,</group>
+  </rule>
+
+</group>

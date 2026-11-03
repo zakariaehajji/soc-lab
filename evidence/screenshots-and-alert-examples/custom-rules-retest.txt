@@ -1,0 +1,34 @@
+RETEST_START 2026-11-03T19:40:54Z
+[sudo] password for kali: [REDACTED]           (Status: 301) [Size: 0] [--> /admin/]
+.git                 (Status: 301) [Size: 0] [--> /.git/]
+images               (Status: 301) [Size: 0] [--> /images/]
+total {'value': 14, 'relation': 'eq'}
+HIT 2026-11-03T19:41:03.705+0000 100110 8 SOC-LAB: Web directory enumeration (Gobuster-like) detected
+HIT 2026-11-03T19:41:01.811+0000 100113 7 SOC-LAB: High-frequency HTTP request burst detected
+HIT 2026-11-03T19:41:01.732+0000 100112 8 SOC-LAB: Suspicious .git path probe detected
+HIT 2026-11-03T19:41:01.723+0000 100111 7 SOC-LAB: Suspicious web path probe (/admin) detected
+HIT 2026-11-03T19:41:01.705+0000 100121 6 SOC-LAB: ICMP echo burst / ping sweep from Kali
+HIT 2026-11-03T19:40:59.701+0000 100120 4 SOC-LAB: ICMP echo request from Kali (rate-limited)
+HIT 2026-11-03T19:40:59.698+0000 100105 7 SOC-LAB: Nmap TCP Xmas scan detected via Suricata
+HIT 2026-11-03T19:40:57.700+0000 100103 7 SOC-LAB: Nmap TCP NULL scan detected via Suricata
+HIT 2026-11-03T19:40:55.701+0000 100107 6 SOC-LAB: Common port sweep detected via Suricata
+HIT 2026-11-03T19:40:55.699+0000 100106 6 SOC-LAB: Service/version probe burst detected via Suricata
+HIT 2026-11-03T19:40:55.698+0000 100102 6 SOC-LAB: Nmap TCP connect-style scan detected via Suricata
+HIT 2026-11-03T19:40:55.697+0000 100101 6 SOC-LAB: Nmap TCP SYN scan detected via Suricata
+HIT 2026-11-03T19:40:25.820+0000 100102 6 SOC-LAB: Nmap TCP connect-style scan detected via Suricata
+HIT 2026-11-03T19:40:25.689+0000 86601 3 Suricata: Alert - LOCAL SCAN Possible TCP SYN Scan from Kali
+SUMMARY
+2 100102 6 SOC-LAB: Nmap TCP connect-style scan detected via Suricata
+1 100110 8 SOC-LAB: Web directory enumeration (Gobuster-like) detected
+1 100113 7 SOC-LAB: High-frequency HTTP request burst detected
+1 100112 8 SOC-LAB: Suspicious .git path probe detected
+1 100111 7 SOC-LAB: Suspicious web path probe (/admin) detected
+1 100121 6 SOC-LAB: ICMP echo burst / ping sweep from Kali
+1 100120 4 SOC-LAB: ICMP echo request from Kali (rate-limited)
+1 100105 7 SOC-LAB: Nmap TCP Xmas scan detected via Suricata
+1 100103 7 SOC-LAB: Nmap TCP NULL scan detected via Suricata
+1 100107 6 SOC-LAB: Common port sweep detected via Suricata
+1 100106 6 SOC-LAB: Service/version probe burst detected via Suricata
+1 100101 6 SOC-LAB: Nmap TCP SYN scan detected via Suricata
+1 86601 3 Suricata: Alert - LOCAL SCAN Possible TCP SYN Scan from Kali
+RETEST_DONE

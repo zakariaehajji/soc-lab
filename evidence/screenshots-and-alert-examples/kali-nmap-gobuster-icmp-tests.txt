@@ -1,0 +1,189 @@
+TEST_START 2026-11-03T19:35:33Z
+SRC=192.168.221.30 DST=192.168.221.136
+===== SYN_SCAN =====
+CMD: nmap -sS -Pn -T4 --top-ports 20 192.168.221.136
+TS_START=2026-11-03T19:35:33Z
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-11-03 14:35 -0500
+Nmap scan report for 192.168.221.136
+Host is up (0.0011s latency).
+
+PORT     STATE  SERVICE
+21/tcp   closed ftp
+22/tcp   closed ssh
+23/tcp   closed telnet
+25/tcp   closed smtp
+53/tcp   closed domain
+80/tcp   closed http
+110/tcp  closed pop3
+111/tcp  closed rpcbind
+135/tcp  closed msrpc
+139/tcp  closed netbios-ssn
+143/tcp  closed imap
+443/tcp  closed https
+445/tcp  closed microsoft-ds
+993/tcp  closed imaps
+995/tcp  closed pop3s
+1723/tcp closed pptp
+3306/tcp closed mysql
+3389/tcp closed ms-wbt-server
+5900/tcp closed vnc
+8080/tcp closed http-proxy
+MAC Address: 00:0C:29:70:C2:91 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.85 seconds
+TS_END=2026-11-03T19:35:34Z
+EXIT=0
+===== CONNECT_SCAN =====
+CMD: nmap -sT -Pn -T4 --top-ports 20 192.168.221.136
+TS_START=2026-11-03T19:35:37Z
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-11-03 14:35 -0500
+Nmap scan report for 192.168.221.136
+Host is up (0.0034s latency).
+
+PORT     STATE  SERVICE
+21/tcp   closed ftp
+22/tcp   closed ssh
+23/tcp   closed telnet
+25/tcp   closed smtp
+53/tcp   closed domain
+80/tcp   closed http
+110/tcp  closed pop3
+111/tcp  closed rpcbind
+135/tcp  closed msrpc
+139/tcp  closed netbios-ssn
+143/tcp  closed imap
+443/tcp  closed https
+445/tcp  closed microsoft-ds
+993/tcp  closed imaps
+995/tcp  closed pop3s
+1723/tcp closed pptp
+3306/tcp closed mysql
+3389/tcp closed ms-wbt-server
+5900/tcp closed vnc
+8080/tcp open   http-proxy
+
+Nmap done: 1 IP address (1 host up) scanned in 0.58 seconds
+TS_END=2026-11-03T19:35:37Z
+EXIT=0
+===== NULL_SCAN =====
+CMD: sudo nmap -sN -Pn -T4 --top-ports 20 192.168.221.136
+TS_START=2026-11-03T19:35:40Z
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+TS_END=2026-11-03T19:35:41Z
+EXIT=0
+===== FIN_SCAN =====
+CMD: sudo nmap -sF -Pn -T4 --top-ports 20 192.168.221.136
+TS_START=2026-11-03T19:35:44Z
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+TS_END=2026-11-03T19:35:44Z
+EXIT=0
+===== XMAS_SCAN =====
+CMD: sudo nmap -sX -Pn -T4 --top-ports 20 192.168.221.136
+TS_START=2026-11-03T19:35:47Z
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+TS_END=2026-11-03T19:35:47Z
+EXIT=0
+===== VERSION_SCAN =====
+CMD: nmap -sV -Pn -T4 --top-ports 15 192.168.221.136
+TS_START=2026-11-03T19:35:50Z
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-11-03 14:35 -0500
+Nmap scan report for 192.168.221.136
+Host is up (0.00062s latency).
+
+PORT     STATE  SERVICE       VERSION
+21/tcp   closed ftp
+22/tcp   closed ssh
+23/tcp   closed telnet
+25/tcp   closed smtp
+53/tcp   closed domain
+80/tcp   closed http
+110/tcp  closed pop3
+135/tcp  closed msrpc
+139/tcp  closed netbios-ssn
+143/tcp  closed imap
+443/tcp  closed https
+445/tcp  closed microsoft-ds
+3306/tcp closed mysql
+3389/tcp closed ms-wbt-server
+8080/tcp open   http          SimpleHTTPServer 0.6 (Python 3.14.4)
+MAC Address: 00:0C:29:70:C2:91 (VMware)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 7.38 seconds
+TS_END=2026-11-03T19:35:57Z
+EXIT=0
+===== COMMON_PORTS =====
+CMD: nmap -sS -Pn -T4 --top-ports 100 192.168.221.136
+TS_START=2026-11-03T19:36:00Z
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-11-03 14:36 -0500
+Nmap scan report for 192.168.221.136
+Host is up (0.0026s latency).
+Not shown: 99 closed tcp ports (reset)
+PORT     STATE SERVICE
+8080/tcp open  http-proxy
+MAC Address: 00:0C:29:70:C2:91 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.79 seconds
+TS_END=2026-11-03T19:36:01Z
+EXIT=0
+===== ICMP_SINGLE =====
+CMD: ping -c 3 192.168.221.136
+TS_START=2026-11-03T19:36:04Z
+PING 192.168.221.136 (192.168.221.136) 56(84) bytes of data.
+64 bytes from 192.168.221.136: icmp_seq=1 ttl=64 time=1.12 ms
+64 bytes from 192.168.221.136: icmp_seq=2 ttl=64 time=0.929 ms
+64 bytes from 192.168.221.136: icmp_seq=3 ttl=64 time=0.660 ms
+
+--- 192.168.221.136 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2004ms
+rtt min/avg/max/mdev = 0.660/0.902/1.119/0.188 ms
+TS_END=2026-11-03T19:36:06Z
+EXIT=0
+===== ICMP_BURST =====
+CMD: ping -c 12 -i 0.2 192.168.221.136
+TS_START=2026-11-03T19:36:09Z
+PING 192.168.221.136 (192.168.221.136) 56(84) bytes of data.
+64 bytes from 192.168.221.136: icmp_seq=1 ttl=64 time=0.812 ms
+64 bytes from 192.168.221.136: icmp_seq=2 ttl=64 time=1.31 ms
+64 bytes from 192.168.221.136: icmp_seq=3 ttl=64 time=0.910 ms
+64 bytes from 192.168.221.136: icmp_seq=4 ttl=64 time=0.511 ms
+64 bytes from 192.168.221.136: icmp_seq=5 ttl=64 time=0.933 ms
+64 bytes from 192.168.221.136: icmp_seq=6 ttl=64 time=0.781 ms
+64 bytes from 192.168.221.136: icmp_seq=7 ttl=64 time=0.619 ms
+64 bytes from 192.168.221.136: icmp_seq=8 ttl=64 time=0.659 ms
+64 bytes from 192.168.221.136: icmp_seq=9 ttl=64 time=0.776 ms
+64 bytes from 192.168.221.136: icmp_seq=10 ttl=64 time=0.485 ms
+64 bytes from 192.168.221.136: icmp_seq=11 ttl=64 time=1.96 ms
+64 bytes from 192.168.221.136: icmp_seq=12 ttl=64 time=0.593 ms
+
+--- 192.168.221.136 ping statistics ---
+12 packets transmitted, 12 received, 0% packet loss, time 2225ms
+rtt min/avg/max/mdev = 0.485/0.862/1.964/0.395 ms
+TS_END=2026-11-03T19:36:11Z
+EXIT=0
+===== WEB_CHECK =====
+web_code=200
+===== GOBUSTER =====
+CMD: gobuster dir -u http://192.168.221.136:8080 -w /tmp/wl.txt -q -t 20 --no-error
+TS_START=2026-11-03T19:36:14Z
+images               (Status: 301) [Size: 0] [--> /images/]
+admin                (Status: 301) [Size: 0] [--> /admin/]
+.git                 (Status: 301) [Size: 0] [--> /.git/]
+TS_END=2026-11-03T19:36:16Z
+EXIT=0
+===== CURL_ADMIN =====
+CMD: curl -s -m 3 -o /dev/null -w admin=%{http_code}\n http://192.168.221.136:8080/admin/
+TS_START=2026-11-03T19:36:19Z
+admin=200
+TS_END=2026-11-03T19:36:19Z
+EXIT=0
+===== CURL_GIT =====
+CMD: curl -s -m 3 -o /dev/null -w git=%{http_code}\n http://192.168.221.136:8080/.git/HEAD
+TS_START=2026-11-03T19:36:22Z
+git=200
+TS_END=2026-11-03T19:36:22Z
+EXIT=0
+TEST_END 2026-11-03T19:36:25Z

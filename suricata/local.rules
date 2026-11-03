@@ -1,0 +1,41 @@
+# SOC Lab custom rules — VMnet1 192.168.221.0/24 only
+# SIDs 1000001-1000019 reserved for this lab
+
+# Existing — TCP SYN scan bursts from Kali
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible TCP SYN Scan from Kali"; flags:S; flow:stateless; threshold:type both, track by_src, count 5, seconds 10; classtype:attempted-recon; sid:1000001; rev:2;)
+
+# TCP Connect scan (completed handshakes / non-SYN-only flood toward many ports is hard; detect rapid SYN+ACK responses pattern via many SYNs still covered by 1000001.
+# Additional: many TCP connections with PSH/ACK after connect — use rapid unique dest ports via flowbits-less threshold on SYN from Kali already covered.
+# Explicit connect-scan helper: burst of established-looking ACKs from Kali is uncommon for pure connect; keep SYN threshold and add:
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible TCP Connect Scan Probe from Kali"; flags:S,12; flow:stateless; threshold:type both, track by_src, count 8, seconds 10; classtype:attempted-recon; sid:1000002; rev:1;)
+
+# TCP NULL scan (no flags)
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible TCP NULL Scan from Kali"; flags:0; flow:stateless; threshold:type both, track by_src, count 5, seconds 10; classtype:attempted-recon; sid:1000003; rev:1;)
+
+# TCP FIN scan
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible TCP FIN Scan from Kali"; flags:F; flow:stateless; threshold:type both, track by_src, count 5, seconds 10; classtype:attempted-recon; sid:1000004; rev:1;)
+
+# TCP Xmas scan (FIN,PSH,URG)
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible TCP Xmas Scan from Kali"; flags:FPU; flow:stateless; threshold:type both, track by_src, count 5, seconds 10; classtype:attempted-recon; sid:1000005; rev:1;)
+
+# Service/version detection (-sV) often triggers many app-layer probes; detect rapid multi-port SYN from Kali to common service ports
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 ![22] (msg:"LOCAL SCAN Possible Service Version Probe Burst from Kali"; flags:S; flow:stateless; threshold:type both, track by_src, count 10, seconds 15; classtype:attempted-recon; sid:1000006; rev:1;)
+
+# Common/top ports sweep
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible Common Port Sweep from Kali"; flags:S; flow:stateless; threshold:type both, track by_src, count 15, seconds 20; classtype:attempted-recon; sid:1000007; rev:1;)
+
+# Gobuster / HTTP enumeration — high-rate GETs and 404-driven recon against lab web targets
+alert http 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL WEB Possible Directory Enumeration (Gobuster-like) from Kali"; flow:to_server,established; http.method; content:"GET"; threshold:type both, track by_src, count 20, seconds 10; classtype:web-application-attack; sid:1000010; rev:1;)
+
+alert http 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL WEB Suspicious Common Path Probe from Kali"; flow:to_server,established; http.uri; content:"/admin"; nocase; threshold:type limit, track by_src, count 1, seconds 30; classtype:web-application-attack; sid:1000011; rev:1;)
+
+alert http 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL WEB Suspicious Common Path Probe (.git) from Kali"; flow:to_server,established; http.uri; content:".git"; nocase; threshold:type limit, track by_src, count 1, seconds 60; classtype:web-application-attack; sid:1000012; rev:1;)
+
+alert http 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL WEB High-Frequency HTTP Requests from Kali"; flow:to_server,established; threshold:type both, track by_src, count 40, seconds 10; classtype:web-application-attack; sid:1000013; rev:1;)
+
+# ICMP lab activity
+alert icmp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL ICMP Echo Request from Kali"; itype:8; threshold:type limit, track by_src, count 1, seconds 30; classtype:attempted-recon; sid:1000020; rev:1;)
+
+alert icmp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL ICMP Echo Burst / Ping Sweep from Kali"; itype:8; threshold:type both, track by_src, count 8, seconds 5; classtype:attempted-recon; sid:1000021; rev:1;)
+
+alert icmp 192.168.221.0/24 any -> 192.168.221.0/24 any (msg:"LOCAL ICMP Repeated Echo between Lab Hosts"; itype:8; threshold:type both, track by_src, count 15, seconds 10; classtype:attempted-recon; sid:1000022; rev:1;)

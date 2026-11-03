@@ -1,0 +1,44 @@
+# Python / ML
+ml-engine/.venv/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+*.log
+
+# Secrets / local env
+.env
+.env.*
+*.pem
+*.key
+*credentials*
+*CREDENTIALS*
+*_pass*
+secrets/
+.private/
+
+# Deploy scratch / remote helper scripts
+ml-engine/deploy_bundle/
+ml-engine/_*.py
+ml-engine/_*.sh
+ml-engine/_*.json
+ml-engine/_*.service
+
+# Runtime enrichment / audit (may contain lab IPs; regenerate on SOC)
+ml-engine/logs/
+**/block_audit.jsonl
+**/enrichment.jsonl
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Large raw datasets (keep processed samples optional)
+ml-engine/data/raw/
+*.pcap
+*.pcapng

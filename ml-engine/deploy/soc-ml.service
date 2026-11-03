@@ -1,0 +1,16 @@
+[Unit]
+Description=SOC ML FastAPI Engine
+After=network.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/soc-ml-engine
+EnvironmentFile=-/opt/soc-ml-engine/.env
+ExecStart=/opt/soc-ml-engine/.venv/bin/uvicorn src.api:app --host 0.0.0.0 --port 8088
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
