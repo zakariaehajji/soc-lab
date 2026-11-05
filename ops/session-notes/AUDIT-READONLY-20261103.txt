@@ -1,0 +1,290 @@
+===== IDS =====
+===== HOST =====
+ids-VMware-Virtual-Platform
+Tue Nov  3 07:25:58 PM UTC 2026
+ 19:25:58 up  1:49,  3 users,  load average: 0.02, 0.10, 0.24
+===== IPS =====
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+2: ens33    inet 192.168.188.137/24 brd 192.168.188.255 scope global dynamic noprefixroute ens33\       valid_lft 1022sec preferred_lft 1022sec
+3: ens37    inet 192.168.221.136/24 brd 192.168.221.255 scope global dynamic noprefixroute ens37\       valid_lft 1610sec preferred_lft 1610sec
+===== SERVICES =====
+active
+enabled
+active
+enabled
+inactive
+inactive
+===== SURICATA =====
+This is Suricata version 8.0.7 RELEASE
+suricata    9614       1  5 19:02 ?        00:01:17 /usr/bin/suricata --af-packet -c /etc/suricata/suricata.yaml --pidfile /run/suricata.pid --user suricata --group suricata
+root        9795    4287  0 19:03 pts/1    00:00:00 sudo tail -f /var/log/suricata/fast.log
+root        9797    9795  0 19:03 pts/2    00:00:00 sudo tail -f /var/log/suricata/fast.log
+===== local.rules =====
+NO_LOCAL_RULES
+===== rule-files grep =====
+===== af-packet iface =====
+sudo: interactive authentication is required
+===== eve.json =====
+sudo: interactive authentication is required
+===== wazuh agent =====
+ii  wazuh-agent    4.14.9-1     amd64        Wazuh agent
+===== ossec.conf excerpts =====
+===== client.keys meta =====
+===== manager 1514 =====
+mgr_138_1514_open
+mgr_137_1514_closed
+===== web server =====
+no_web_listeners
+IDS_AUDIT_DONE
+
+===== SOC =====
+SOC_OUT_MISSING
+
+===== KALI =====
+===== HOST =====
+kali
+Tue Nov  3 07:26:15 PM UTC 2026
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+2: eth0    inet 192.168.188.128/24 brd 192.168.188.255 scope global dynamic noprefixroute eth0\       valid_lft 1791sec preferred_lft 1791sec
+3: eth1    inet 192.168.221.30/24 brd 192.168.221.255 scope global noprefixroute eth1\       valid_lft forever preferred_lft forever
+===== tools =====
+/usr/bin/nmap
+Nmap version 7.99 ( https://nmap.org )
+Platform: x86_64-pc-linux-gnu
+/usr/bin/gobuster
+/usr/bin/curl
+/usr/bin/python3
+===== reachability =====
+ids_ping_ok
+soc138_ping_ok
+soc137_ping_fail
+soc138_1514_open
+soc138_443_open
+bash: connect: Connection refused
+bash: line 1: /dev/tcp/192.168.221.138/5601: Connection refused
+soc138_5601_closed
+soc138_9200_open
+bash: connect: Connection refused
+bash: line 1: /dev/tcp/192.168.221.136/80: Connection refused
+ids_80_closed
+KALI_AUDIT_DONE
+
+
+===== IDS PRIVILEGED =====
+[sudo: authenticate] Password: 
+sudo_ok=0
+===== local.rules candidates =====
+/var/lib/suricata/rules/local.rules
+/var/lib/suricata/rules/local.rules
+total 44948
+drwxr-s--- 2 root     suricata     4096 Nov  3 18:35 .
+drwxrws--- 5 suricata suricata     4096 Oct 28 10:27 ..
+-rw-r--r-- 1 root     suricata     3228 Oct 28 10:27 classification.config
+-rw-r--r-- 1 root     suricata      233 Oct 28 19:27 local.rules
+-rw-r--r-- 1 root     suricata 46008944 Oct 28 10:27 suricata.rules
+===== local.rules content =====
+alert tcp 192.168.221.30 any -> 192.168.221.0/24 any (msg:"LOCAL SCAN Possible TCP SYN Scan from Kali"; flags:S; flow:stateless; threshold:type both, track by_src, count 5, seconds 10; classtype:attempted-recon; sid:1000001; rev:1;)
+MISSING_ETC
+===== suricata.yaml rule-files / default-rule-path / af-packet =====
+18:    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+19:    #HOME_NET: "[192.168.0.0/16]"
+20:    #HOME_NET: "[10.0.0.0/8]"
+21:    #HOME_NET: "[172.16.0.0/12]"
+22:    #HOME_NET: "any"
+24:    EXTERNAL_NET: "!$HOME_NET"
+25:    #EXTERNAL_NET: "any"
+27:    HTTP_SERVERS: "$HOME_NET"
+28:    SMTP_SERVERS: "$HOME_NET"
+29:    SQL_SERVERS: "$HOME_NET"
+30:    DNS_SERVERS: "$HOME_NET"
+31:    TELNET_SERVERS: "$HOME_NET"
+32:    AIM_SERVERS: "$EXTERNAL_NET"
+33:    DC_SERVERS: "$HOME_NET"
+34:    DNP3_SERVER: "$HOME_NET"
+35:    DNP3_CLIENT: "$HOME_NET"
+36:    MODBUS_CLIENT: "$HOME_NET"
+37:    MODBUS_SERVER: "$HOME_NET"
+38:    ENIP_CLIENT: "$HOME_NET"
+39:    ENIP_SERVER: "$HOME_NET"
+2337:default-rule-path: /var/lib/suricata/rules
+2339:rule-files:
+2341:  - local.rules
+2363:  #rule-files:
+af-packet:
+  - interface: ens37
+    # Number of receive threads. "auto" uses the number of cores
+    #threads: auto
+    # Default clusterid. AF_PACKET will load balance packets based on flow.
+    cluster-id: 99
+    # Default AF_PACKET cluster type. AF_PACKET can load balance per flow or per hash.
+    # This is only supported for Linux kernel > 3.1
+    # possible value are:
+    #  * cluster_flow: all packets of a given flow are sent to the same socket
+    #  * cluster_cpu: all packets treated in kernel by a CPU are sent to the same socket
+    #  * cluster_qm: all packets linked by network card to a RSS queue are sent to the same
+    #  socket. Requires at least Linux 3.14.
+    #  * cluster_ebpf: eBPF file load balancing. See doc/userguide/capture-hardware/ebpf-xdp.rst for
+    #  more info.
+    # Recommended modes are cluster_flow on most boxes and cluster_cpu or cluster_qm on system
+    # with capture card using RSS (requires cpu affinity tuning and system IRQ tuning)
+    # cluster_rollover has been deprecated; if used, it'll be replaced with cluster_flow.
+    cluster-type: cluster_flow
+    # In some fragmentation cases, the hash can not be computed. If "defrag" is set
+    # to yes, the kernel will do the needed defragmentation before sending the packets.
+    defrag: yes
+    # Lock memory map to avoid it being swapped. Be careful that over
+    # subscribing could lock your system
+    #mmap-locked: yes
+    # Use tpacket_v3 capture mode.
+    # Defaults to true for non-copy modes, and false for tap and ips mode.
+    # Don't use it in IPS or TAP mode as it causes severe latency.
+    #tpacket-v3: yes
+    # Ring size will be computed with respect to "max-pending-packets" and number
+    # of threads. You can set manually the ring size in number of packets by setting
+    # the following value. If you are using flow "cluster-type" and have really network
+    # intensive single-flow you may want to set the "ring-size" independently of the number
+    # of threads:
+    #ring-size: 2048
+    # Block size is used by tpacket_v3 only. It should set to a value high enough to contain
+    # a decent number of packets. Size is in bytes so please consider your MTU. It should be
+    # a power of 2 and it must be multiple of page size (usually 4096).
+    #block-size: 32768
+    # tpacket_v3 block timeout: an open block is passed to userspace if it is not
+===== eve recent alerts =====
+eve_exists True size 18823374
+event_types {'flow': 552, 'dns': 316, 'stats': 170, 'mdns': 74, 'tls': 39, 'dhcp': 8, 'alert': 1}
+alert_sids {1000001: 1}
+ALERT 2026-11-03T19:26:17.153037+0000 1000001 LOCAL SCAN Possible TCP SYN Scan from Kali 192.168.221.30 192.168.221.136 Attempted Information Leak
+===== fast.log tail =====
+10/28/2026-19:14:12.363556  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:57510
+10/28/2026-19:14:12.400125  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:60843
+10/28/2026-19:14:12.412736  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:59175
+10/28/2026-19:14:12.464429  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:54352
+10/28/2026-19:17:23.362186  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:57123
+10/28/2026-19:17:36.273261  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:60632
+10/28/2026-19:17:36.382966  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:60885
+10/28/2026-19:17:38.066213  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:56634
+10/28/2026-19:17:50.859134  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:60455
+10/28/2026-19:17:50.980494  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:57205
+10/28/2026-19:17:51.030294  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:57861
+10/28/2026-19:22:24.491285  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:54900
+10/28/2026-19:22:35.822838  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:65065
+10/28/2026-19:22:35.999746  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:59697
+10/28/2026-19:22:36.038778  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:53292
+10/28/2026-19:22:36.092547  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:55058
+10/28/2026-19:22:36.098746  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:63344
+10/28/2026-19:22:36.123256  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:59783
+10/28/2026-19:22:36.125928  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:63901
+10/28/2026-19:22:36.160338  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:54959
+10/28/2026-19:22:36.162305  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:55993
+10/28/2026-19:22:55.426043  [**] [1:2210016:2] SURICATA STREAM CLOSEWAIT FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:56229
+10/28/2026-19:22:56.305367  [**] [1:2210054:1] SURICATA STREAM excessive retransmissions [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.1:50461 -> 192.168.221.138:443
+10/28/2026-19:22:56.311990  [**] [1:2210054:1] SURICATA STREAM excessive retransmissions [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.1:51275 -> 192.168.221.138:443
+10/28/2026-19:22:56.337055  [**] [1:2210054:1] SURICATA STREAM excessive retransmissions [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.1:57441 -> 192.168.221.138:443
+10/28/2026-19:24:55.483378  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:54743
+10/28/2026-19:25:00.982480  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:60760
+10/28/2026-19:25:00.985238  [**] [1:2210038:3] SURICATA STREAM FIN out of window [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {TCP} 192.168.221.138:443 -> 192.168.221.1:50461
+11/03/2026-19:03:53.615836  [**] [1:1000001:1] LOCAL SCAN Possible TCP SYN Scan from Kali [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 192.168.221.30:41185 -> 192.168.221.136:139
+11/03/2026-19:26:17.153037  [**] [1:1000001:1] LOCAL SCAN Possible TCP SYN Scan from Kali [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 192.168.221.30:42314 -> 192.168.221.136:80
+===== wazuh agent connection =====
+? wazuh-agent.service - Wazuh agent
+     Loaded: loaded (/usr/lib/systemd/system/wazuh-agent.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-10-28 19:00:01 +00; 6 days ago
+ Invocation: 76b1a114764946b0955fef89e029ce12
+      Tasks: 32 (limit: 3960)
+     Memory: 94.9M (peak: 516.9M, swap: 13.2M, swap peak: 13.2M)
+        CPU: 3min 24.685s
+     CGroup: /system.slice/wazuh-agent.service
+             +-1487 /var/ossec/bin/wazuh-execd
+             +-1495 /var/ossec/bin/wazuh-agentd
+             +-1543 /var/ossec/bin/wazuh-syscheckd
+             +-1556 /var/ossec/bin/wazuh-logcollector
+             +-1574 /var/ossec/bin/wazuh-modulesd
+
+Oct 28 18:59:54 ids-VMware-Virtual-Platform env[1376]: Deleting PID file '/var/ossec/var/run/wazuh-syscheckd-17775.pid' not used...
+Oct 28 18:59:54 ids-VMware-Virtual-Platform env[1376]: Deleting PID file '/var/ossec/var/run/wazuh-agentd-17762.pid' not used...
+Oct 28 18:59:54 ids-VMware-Virtual-Platform env[1376]: Deleting PID file '/var/ossec/var/run/wazuh-execd-17753.pid' not used...
+Oct 28 18:59:54 ids-VMware-Virtual-Platform env[1376]: Started wazuh-execd...
+Oct 28 18:59:56 ids-VMware-Virtual-Platform env[1376]: Started wazuh-agentd...
+Oct 28 18:59:57 ids-VMware-Virtual-Platform env[1376]: Started wazuh-syscheckd...
+Oct 28 18:59:58 ids-VMware-Virtual-Platform env[1376]: Started wazuh-logcollector...
+Oct 28 18:59:59 ids-VMware-Virtual-Platform env[1376]: Started wazuh-modulesd...
+Oct 28 19:00:01 ids-VMware-Virtual-Platform env[1376]: Completed.
+Oct 28 19:00:01 ids-VMware-Virtual-Platform systemd[1]: Started wazuh-agent.service - Wazuh agent.
+2026/11/03 18:36:10 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:36:20 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:36:56 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:37:06 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:37:06 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:37:16 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:37:16 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:37:26 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:37:26 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:37:26 wazuh-agentd: ERROR: (1208): Unable to connect to enrollment service at '[192.168.221.138]:1515'
+2026/11/03 18:37:36 wazuh-agentd: WARNING: Unable to connect to any server.
+2026/11/03 18:37:36 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:37:36 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:37:46 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:37:46 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:37:56 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:37:56 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 18:38:06 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 18:38:06 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:08:12 wazuh-agentd: ERROR: (1137): Lost connection with manager. Setting lock.
+2026/11/03 19:08:12 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:08:12 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:08:22 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:08:22 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:08:32 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:08:43 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:08:53 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:08:53 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:03 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:09:03 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:03 wazuh-agentd: ERROR: (1208): Unable to connect to enrollment service at '[192.168.221.138]:1515'
+2026/11/03 19:09:13 wazuh-agentd: WARNING: Unable to connect to any server.
+2026/11/03 19:09:13 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:09:13 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:23 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:09:23 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:33 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:09:33 wazuh-agentd: ERROR: (1216): Unable to connect to '[192.168.221.138]:1514/tcp': 'Transport endpoint is not connected'.
+2026/11/03 19:09:43 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/11/03 19:09:43 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+===== ossec conf critical =====
+size 5009 starts_with '<ossec_config>\n  <client>\n    <server>\n ' ends_nl True has_prolog False
+192.168.221. 1
+1514 1
+eve.json 1
+agent_name 2
+suricata-ids 1
+4:      <address>192.168.221.138</address>
+5:      <port>1514</port>
+6:      <protocol>tcp</protocol>
+15:      <agent_name>suricata-ids</agent_name>
+153:    <location>/var/log/suricata/eve.json</location>
+===== client.keys =====
+001 any
+===== perms =====
+-rw-r--r-- 1 suricata suricata 18823374 Nov  3 19:27 /var/log/suricata/eve.json
+-rw-r----- 1 root     wazuh        5009 Oct 28 11:51 /var/ossec/etc/ossec.conf
+
+/var/log/suricata:
+total 31700
+drwxr-xr-x  5 suricata suricata     4096 Oct 28 10:10 .
+drwxrwxr-x 18 root     syslog       4096 Nov  3 18:32 ..
+drwxrwxr-x  2 root     suricata     4096 Sep 15 15:47 certs
+drwxrwxr-x  2 root     suricata     4096 Sep 15 15:47 core
+-rw-r--r--  1 suricata suricata 18823374 Nov  3 19:27 eve.json
+-rw-r--r--  1 suricata suricata    13610 Nov  3 19:26 fast.log
+drwxrwxr-x  2 root     suricata     4096 Sep 15 15:47 files
+-rw-r--r--  1 suricata suricata 13562619 Nov  3 19:27 stats.log
+-rw-r--r--  1 suricata suricata    22674 Nov  3 19:03 suricata.log
+uid=113(wazuh) gid=116(wazuh) groups=116(wazuh),115(suricata)
+suricata:x:115:wazuh
+uid=1000(ids) gid=1000(ids) groups=1000(ids),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),111(lpadmin),114(lxd)
+wazuh : wazuh suricata
+IDS2_DONE
+
+===== SOC PRIVILEGED =====
+SOC_STILL_MISSING

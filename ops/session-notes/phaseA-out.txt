@@ -1,0 +1,288 @@
+[sudo: authenticate] Password: 
+===== A1 backup =====
+-rw-r----- 1 root wazuh 5047 Oct 28 11:18 /root/ossec.conf.phaseA-20261028-115033
+===== A2 perms =====
+-rw-r----- 1 root wazuh 5047 Oct 28 11:18 /var/ossec/etc/ossec.conf
+/var/ossec/etc/ossec.conf: XML 1.0 document, ASCII text
+640 root:wazuh /var/ossec/etc/ossec.conf
+===== A3 package/service =====
+ii  wazuh-agent    4.14.9-1     amd64        Wazuh agent
+failed
+enabled
+× wazuh-agent.service - Wazuh agent
+     Loaded: loaded (/usr/lib/systemd/system/wazuh-agent.service; enabled; preset: enabled)
+     Active: failed (Result: exit-code) since Wed 2026-10-28 10:31:06 +00; 1h 19min ago
+   Duration: 17min 58.531s
+ Invocation: 3296b321bc56497da4aec881fa4f76e1
+    Process: 15154 ExecStart=/usr/bin/env /var/ossec/bin/wazuh-control start (code=exited, status=1/FAILURE)
+   Mem peak: 2.8M
+        CPU: 88ms
+
+Oct 28 10:31:06 ids-VMware-Virtual-Platform systemd[1]: Starting wazuh-agent.service - Wazuh agent...
+Oct 28 10:31:06 ids-VMware-Virtual-Platform env[15162]: 2026/10/28 10:31:06 wazuh-execd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+Oct 28 10:31:06 ids-VMware-Virtual-Platform env[15154]: wazuh-execd: Configuration error. Exiting
+Oct 28 10:31:06 ids-VMware-Virtual-Platform systemd[1]: wazuh-agent.service: Control process exited, code=exited, status=1/FAILURE
+Oct 28 10:31:06 ids-VMware-Virtual-Platform systemd[1]: wazuh-agent.service: Failed with result 'exit-code'.
+Oct 28 10:31:06 ids-VMware-Virtual-Platform systemd[1]: Failed to start wazuh-agent.service - Wazuh agent.
+ 
+Wazuh v4.14.9 - Wazuh Inc.
+ 
+===== A4 eve.json =====
+-rw-r--r-- 1 suricata suricata 5716372 Oct 28 11:50 /var/log/suricata/eve.json
+wazuh_cannot_read
+===== A5 encoding =====
+00000000: 3c3f 786d 6c20 7665 7273 696f 6e3d 2731  <?xml version='1
+---tail---
+000013a7: 0a3c 2f6f 7373 6563 5f63 6f6e 6669 673e  .</ossec_config>
+size=5047 bom=False prolog=True cr=False nul=False nl_end=False
+head_repr= b"<?xml version='1.0' encoding='utf-8'?>\n<ossec_config>\n  <client>\n    <server>\n      <address>192.168.221.138</address>\n "
+tail_repr= b'location>\n  </localfile>\n</ossec_config>'
+===== A6 structure =====
+root ossec_config
+  localfile:7
+  wodle:3
+  client:1
+  client_buffer:1
+  rootcheck:1
+  sca:1
+  syscheck:1
+  active-response:1
+  logging:1
+total 17
+===== A7 greps =====
+1:<?xml version='1.0' encoding='utf-8'?>
+2:<ossec_config>
+5:      <address>192.168.221.138</address>
+6:      <port>1514</port>
+7:      <protocol>tcp</protocol>
+16:      <agent_name>suricata-ids</agent_name>
+117:    <log_format>command</log_format>
+122:    <log_format>full_command</log_format>
+128:    <log_format>full_command</log_format>
+138:    <log_format>plain</log_format>
+141:    <log_format>journald</log_format>
+142:    <location>journald</location>
+145:    <log_format>syslog</log_format>
+146:    <location>/var/ossec/logs/active-responses.log</location>
+149:    <log_format>syslog</log_format>
+150:    <location>/var/log/dpkg.log</location>
+153:    <log_format>json</log_format>
+154:    <location>/var/log/suricata/eve.json</location>
+===== A8 logs =====
+2026/10/28 10:13:45 wazuh-agentd: INFO: SIGNAL [(10)-(User defined signal 1)] Received. Reload agentd.
+2026/10/28 10:13:45 wazuh-agentd: INFO: Buffer agent.conf updated, enable: 1 size: 5000 
+2026/10/28 10:31:04 wazuh-logcollector: INFO: (1225): SIGNAL [(15)-(Terminated)] Received. Exit Cleaning...
+2026/10/28 10:31:04 wazuh-agentd: INFO: (1225): SIGNAL [(15)-(Terminated)] Received. Exit Cleaning...
+2026/10/28 10:31:06 wazuh-execd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 10:34:20 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 10:38:53 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 10:39:52 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:06:57 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:06:57 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:07:55 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:08:44 wazuh-agentd[15882] debug_op.c:293 at os_logging_config(): ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:10:28 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:49 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:23 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:50 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:14:20 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:18:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+===== A9 tests =====
+2026/10/28 11:50:34 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+agentd_exit=1
+2026/10/28 11:50:34 wazuh-logcollector: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+logcollector_exit=1
+2026/10/28 11:50:34 wazuh-modulesd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+modulesd_exit=1
+===== A10 keys =====
+-rw-r----- 1 wazuh wazuh 86 Oct 28 10:12 /var/ossec/etc/client.keys
+4 85 001
+===== FULL CONF =====
+<?xml version='1.0' encoding='utf-8'?>
+<ossec_config>
+  <client>
+    <server>
+      <address>192.168.221.138</address>
+      <port>1514</port>
+      <protocol>tcp</protocol>
+    </server>
+    <config-profile>ubuntu, ubuntu26, ubuntu26.04</config-profile>
+    <notify_time>20</notify_time>
+    <time-reconnect>60</time-reconnect>
+    <auto_restart>yes</auto_restart>
+    <crypto_method>aes</crypto_method>
+    <enrollment>
+      <enabled>yes</enabled>
+      <agent_name>suricata-ids</agent_name>
+      <authorization_pass_path>etc/authd.pass</authorization_pass_path>
+    </enrollment>
+  </client>
+  <client_buffer>
+    <disabled>no</disabled>
+    <queue_size>5000</queue_size>
+    <events_per_second>500</events_per_second>
+  </client_buffer>
+  <rootcheck>
+    <disabled>no</disabled>
+    <check_files>yes</check_files>
+    <check_trojans>yes</check_trojans>
+    <check_dev>yes</check_dev>
+    <check_sys>yes</check_sys>
+    <check_pids>yes</check_pids>
+    <check_ports>yes</check_ports>
+    <check_if>yes</check_if>
+    <frequency>43200</frequency>
+    <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
+    <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
+    <skip_nfs>yes</skip_nfs>
+    <ignore>/var/lib/containerd</ignore>
+    <ignore>/var/lib/docker/overlay2</ignore>
+  </rootcheck>
+  <wodle name="cis-cat">
+    <disabled>yes</disabled>
+    <timeout>1800</timeout>
+    <interval>1d</interval>
+    <scan-on-start>yes</scan-on-start>
+    <java_path>wodles/java</java_path>
+    <ciscat_path>wodles/ciscat</ciscat_path>
+  </wodle>
+  <wodle name="osquery">
+    <disabled>yes</disabled>
+    <run_daemon>yes</run_daemon>
+    <log_path>/var/log/osquery/osqueryd.results.log</log_path>
+    <config_path>/etc/osquery/osquery.conf</config_path>
+    <add_labels>yes</add_labels>
+  </wodle>
+  <wodle name="syscollector">
+    <disabled>no</disabled>
+    <interval>1h</interval>
+    <scan_on_start>yes</scan_on_start>
+    <hardware>yes</hardware>
+    <os>yes</os>
+    <network>yes</network>
+    <packages>yes</packages>
+    <ports all="yes">yes</ports>
+    <processes>yes</processes>
+    <users>yes</users>
+    <groups>yes</groups>
+    <services>yes</services>
+    <browser_extensions>yes</browser_extensions>
+    <synchronization>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </wodle>
+  <sca>
+    <enabled>yes</enabled>
+    <scan_on_start>yes</scan_on_start>
+    <interval>12h</interval>
+    <skip_nfs>yes</skip_nfs>
+  </sca>
+  <syscheck>
+    <disabled>no</disabled>
+    <frequency>43200</frequency>
+    <scan_on_start>yes</scan_on_start>
+    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/bin,/sbin,/boot</directories>
+    <ignore>/etc/mtab</ignore>
+    <ignore>/etc/hosts.deny</ignore>
+    <ignore>/etc/mail/statistics</ignore>
+    <ignore>/etc/random-seed</ignore>
+    <ignore>/etc/random.seed</ignore>
+    <ignore>/etc/adjtime</ignore>
+    <ignore>/etc/httpd/logs</ignore>
+    <ignore>/etc/utmpx</ignore>
+    <ignore>/etc/wtmpx</ignore>
+    <ignore>/etc/cups/certs</ignore>
+    <ignore>/etc/dumpdates</ignore>
+    <ignore>/etc/svc/volatile</ignore>
+    <ignore type="sregex">.log$|.swp$</ignore>
+    <nodiff type="sregex">^/etc/ssl/private/|^/etc/pki/tls/private/</nodiff>
+    <nodiff>/etc/shadow</nodiff>
+    <nodiff>/etc/shadow-</nodiff>
+    <nodiff>/etc/gshadow</nodiff>
+    <nodiff>/etc/gshadow-</nodiff>
+    <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
+    <process_priority>10</process_priority>
+    <max_eps>50</max_eps>
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </syscheck>
+  <localfile>
+    <log_format>command</log_format>
+    <command>df -P</command>
+    <frequency>360</frequency>
+  </localfile>
+  <localfile>
+    <log_format>full_command</log_format>
+    <command>netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d</command>
+    <alias>netstat listening ports</alias>
+    <frequency>360</frequency>
+  </localfile>
+  <localfile>
+    <log_format>full_command</log_format>
+    <command>last -n 20</command>
+    <frequency>360</frequency>
+  </localfile>
+  <active-response>
+    <disabled>no</disabled>
+    <ca_store>etc/wpk_root.pem</ca_store>
+    <ca_verification>yes</ca_verification>
+  </active-response>
+  <logging>
+    <log_format>plain</log_format>
+  </logging>
+  <localfile>
+    <log_format>journald</log_format>
+    <location>journald</location>
+  </localfile>
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/ossec/logs/active-responses.log</location>
+  </localfile>
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/dpkg.log</location>
+  </localfile>
+  <localfile>
+    <log_format>json</log_format>
+    <location>/var/log/suricata/eve.json</location>
+  </localfile>
+</ossec_config>===== DONE =====

@@ -1,0 +1,139 @@
+[sudo: authenticate] Password: 
+===== agentd connection =====
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:49 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:23 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:50 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:14:20 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:18:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:51:51 wazuh-agentd: INFO: Using notify time: 20 and max time to reconnect: 60
+2026/10/28 11:51:51 wazuh-agentd: INFO: Using AES as encryption method.
+2026/10/28 11:51:51 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/10/28 11:51:51 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+===== logcollector suricata =====
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:14:20 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:18:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-logcollector: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-modulesd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/ossec/logs/active-responses.log'.
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/dpkg.log'.
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'.
+===== agent-info =====
+<agent_config>
+
+  <!-- Shared agent configuration here -->
+
+</agent_config>
+total 12
+drwxrwx--- 2 wazuh wazuh 4096 Oct 28 11:51 .
+drwxr-x--- 9 root  wazuh 4096 Oct 28 10:12 ..
+-rw-r--r-- 1 wazuh wazuh   49 Oct 28 11:51 .agent_info
+srw-rw---- 1 root  wazuh    0 Oct 28 11:51 com
+srw-rw---- 1 root  wazuh    0 Oct 28 11:51 control
+srw-rw---- 1 root  wazuh    0 Oct 28 11:51 logcollector
+srw-rw---- 1 wazuh wazuh    0 Oct 28 11:51 queue
+srw-rw---- 1 root  wazuh    0 Oct 28 11:51 syscheck
+srw-rw---- 1 root  wazuh    0 Oct 28 11:51 upgrade
+===== before marker =====
+sudo: interactive authentication is required
+eve_lines_before=
+2026-10-28T11:52:36Z
+MARKER_READY
+---
+pinging IDS lab iface
+PING 192.168.221.136 (192.168.221.136) 56(84) bytes of data.
+64 bytes from 192.168.221.136: icmp_seq=1 ttl=64 time=2.65 ms
+64 bytes from 192.168.221.136: icmp_seq=2 ttl=64 time=2.13 ms
+64 bytes from 192.168.221.136: icmp_seq=3 ttl=64 time=1.54 ms
+64 bytes from 192.168.221.136: icmp_seq=4 ttl=64 time=1.12 ms
+64 bytes from 192.168.221.136: icmp_seq=5 ttl=64 time=1.49 ms
+
+--- 192.168.221.136 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4014ms
+rtt min/avg/max/mdev = 1.115/1.785/2.652/0.541 ms
+PING_DONE
+---
+[sudo: authenticate] Password: 
+===== after ping =====
+sudo: interactive authentication is required
+eve_lines_after=
+===== recent icmp/ping related eve =====
+hits 0
+===== wazuh agentd status now =====
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:27 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:11:49 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:23 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:50 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:14:20 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:18:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-logcollector: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-modulesd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:51:51 wazuh-agentd: INFO: Trying to connect to server ([192.168.221.138]:1514/tcp).
+2026/10/28 11:51:51 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+===== service =====
+active
+agentd_test=0
+DONE

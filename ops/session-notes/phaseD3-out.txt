@@ -1,0 +1,74 @@
+[sudo: authenticate] Password: 
+===== suricata status =====
+active
+suricata   15094       1  1 10:31 ?        00:01:37 /usr/bin/suricata --af-packet -c /etc/suricata/suricata.yaml --pidfile /run/suricata.pid --user suricata --group suricata
+===== capture iface =====
+18:    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+24:    EXTERNAL_NET: "!$HOME_NET"
+89:outputs:
+636:  outputs:
+661:af-packet:
+804:  interfaces:
+1943:      interface-specific-cpu-set:
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+2: ens33    inet 192.168.188.137/24 brd 192.168.188.255 scope global dynamic noprefixroute ens33\       valid_lft 1559sec preferred_lft 1559sec
+3: ens37    inet 192.168.221.136/24 brd 192.168.221.255 scope global dynamic noprefixroute ens37\       valid_lft 1247sec preferred_lft 1247sec
+===== eve stats =====
+-rw-r--r-- 1 suricata suricata 5962656 Oct 28 11:53 /var/log/suricata/eve.json
+sudo: interactive authentication is required
+before=
+event_types {'stats': 30, 'flow': 35, 'dns': 29, 'dhcp': 2}
+icmp_like 2
+last_icmp 2026-10-28T11:53:18.311549+0000 flow 192.168.221.1 192.168.221.136
+MARKER
+PING 192.168.221.136 (192.168.221.136) 56(84) bytes of data.
+64 bytes from 192.168.221.136: icmp_seq=1 ttl=64 time=0.956 ms
+64 bytes from 192.168.221.136: icmp_seq=2 ttl=64 time=1.55 ms
+64 bytes from 192.168.221.136: icmp_seq=3 ttl=64 time=3.44 ms
+
+--- 192.168.221.136 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 0.956/1.982/3.441/1.059 ms
+curl: (7) Failed to connect to 192.168.221.136:80 after 2 ms: Could not connect to server
+curl: (7) Failed to connect to 192.168.221.136:80 after 1 ms: Could not connect to server
+TRAFFIC_DONE
+[sudo: authenticate] Password: 
+sudo: interactive authentication is required
+after=
+relevant 2
+2026-10-28T11:49:28.636248+0000 flow 192.168.221.30 192.168.221.136 TCP None None
+2026-10-28T11:49:30.645707+0000 flow 192.168.221.30 192.168.221.136 TCP None None
+===== wazuh archives/alerts local (agent side limited) =====
+total 48
+drwxrwx---  3 wazuh wazuh  4096 Oct 28 10:12 .
+drwxr-x--- 15 root  wazuh  4096 Oct 28 10:12 ..
+-rw-rw----  1 wazuh wazuh    67 Oct 28 10:13 active-responses.log
+-rw-rw----  1 root  wazuh 24768 Oct 28 11:53 ossec.log
+drwxr-x---  2 wazuh wazuh  4096 Oct  8 13:44 wazuh
+2026/10/28 11:11:49 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:23 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:12:50 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:13:32 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:14:20 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:15:26 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:16:22 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:17:11 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:18:19 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-agentd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-logcollector: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:50:34 wazuh-modulesd: ERROR: (1226): Error reading XML file 'etc/ossec.conf':  (line 0).
+2026/10/28 11:51:51 wazuh-agentd: INFO: (4102): Connected to the server ([192.168.221.138]:1514/tcp).
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'.
+active
+DONE

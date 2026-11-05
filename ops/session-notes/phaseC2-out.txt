@@ -1,0 +1,107 @@
+[sudo: authenticate] Password: 
+BACKUP=/root/ossec.conf.pre-prolog-fix-20261028-115150
+prolog_removed=1
+newline_added=True
+size=5009 starts=b'<ossec_config>\n  <cl' ends_nl=True has_prolog=False
+===== tests =====
+agentd_exit=0
+logcollector_exit=0
+modulesd_exit=0
+syscheckd_exit=0
+execd_exit=0
+REPAIR_OK
+===== eve.json perms =====
+drwxrwx--- 5 suricata suricata    4096 Oct 28 10:10 /var/log/suricata
+-rw-r--r-- 1 suricata suricata 5810746 Oct 28 11:51 /var/log/suricata/eve.json
+wazuh_read_exit=1
+wazuh_traverse_exit=1
+suricata:x:115:
+wazuh_read_after=0
+===== restart =====
+active
+● wazuh-agent.service - Wazuh agent
+     Loaded: loaded (/usr/lib/systemd/system/wazuh-agent.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-10-28 11:51:56 +00; 4s ago
+ Invocation: 92534aae78cc4d1d842c75a9739d6ecc
+    Process: 17731 ExecStart=/usr/bin/env /var/ossec/bin/wazuh-control start (code=exited, status=0/SUCCESS)
+      Tasks: 33 (limit: 3960)
+     Memory: 366.7M (peak: 367M)
+        CPU: 12.901s
+     CGroup: /system.slice/wazuh-agent.service
+             ├─17753 /var/ossec/bin/wazuh-execd
+             ├─17762 /var/ossec/bin/wazuh-agentd
+             ├─17775 /var/ossec/bin/wazuh-syscheckd
+             ├─17788 /var/ossec/bin/wazuh-logcollector
+             └─17803 /var/ossec/bin/wazuh-modulesd
+
+Oct 28 11:51:51 ids-VMware-Virtual-Platform systemd[1]: Starting wazuh-agent.service - Wazuh agent...
+Oct 28 11:51:51 ids-VMware-Virtual-Platform env[17731]: Starting Wazuh v4.14.9...
+Oct 28 11:51:51 ids-VMware-Virtual-Platform env[17731]: Started wazuh-execd...
+Oct 28 11:51:52 ids-VMware-Virtual-Platform env[17731]: Started wazuh-agentd...
+Oct 28 11:51:53 ids-VMware-Virtual-Platform env[17731]: Started wazuh-syscheckd...
+Oct 28 11:51:53 ids-VMware-Virtual-Platform env[17731]: Started wazuh-logcollector...
+Oct 28 11:51:54 ids-VMware-Virtual-Platform env[17731]: Started wazuh-modulesd...
+Oct 28 11:51:56 ids-VMware-Virtual-Platform env[17731]: Completed.
+Oct 28 11:51:56 ids-VMware-Virtual-Platform systemd[1]: Started wazuh-agent.service - Wazuh agent.
+===== ossec.log =====
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6003): Monitoring path: '/bin', with options 'size | permissions | owner | group | mtime | inode | hash_md5 | hash_sha1 | hash_sha256 | scheduled'.
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6003): Monitoring path: '/boot', with options 'size | permissions | owner | group | mtime | inode | hash_md5 | hash_sha1 | hash_sha256 | scheduled'.
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6003): Monitoring path: '/etc', with options 'size | permissions | owner | group | mtime | inode | hash_md5 | hash_sha1 | hash_sha256 | scheduled'.
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6003): Monitoring path: '/sbin', with options 'size | permissions | owner | group | mtime | inode | hash_md5 | hash_sha1 | hash_sha256 | scheduled'.
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6003): Monitoring path: '/usr/bin', with options 'size | permissions | owner | group | mtime | inode | hash_md5 | hash_sha1 | hash_sha256 | scheduled'.
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6003): Monitoring path: '/usr/sbin', with options 'size | permissions | owner | group | mtime | inode | hash_md5 | hash_sha1 | hash_sha256 | scheduled'.
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/mtab'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/hosts.deny'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/mail/statistics'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/random-seed'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/random.seed'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/adjtime'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/httpd/logs'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/utmpx'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/wtmpx'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/cups/certs'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/dumpdates'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6206): Ignore 'file' entry '/etc/svc/volatile'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6207): Ignore 'file' sregex '.log$|.swp$'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6004): No diff for file: '/etc/shadow'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6004): No diff for file: '/etc/shadow-'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6004): No diff for file: '/etc/gshadow'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6004): No diff for file: '/etc/gshadow-'
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6000): Starting daemon...
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6010): File integrity monitoring scan frequency: 43200 seconds
+2026/10/28 11:51:52 wazuh-syscheckd: INFO: (6008): File integrity monitoring scan started.
+2026/10/28 11:51:52 rootcheck: INFO: Starting rootcheck scan.
+2026/10/28 11:51:53 wazuh-logcollector: INFO: Monitoring output of command(360): df -P
+2026/10/28 11:51:53 wazuh-logcollector: INFO: Monitoring full output of command(360): netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d
+2026/10/28 11:51:53 wazuh-logcollector: INFO: Monitoring full output of command(360): last -n 20
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/ossec/logs/active-responses.log'.
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/dpkg.log'.
+2026/10/28 11:51:53 wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'.
+2026/10/28 11:51:53 wazuh-logcollector: INFO: Started (pid: 17788).
+2026/10/28 11:51:53 wazuh-modulesd: INFO: Started (pid: 17803).
+2026/10/28 11:51:53 wazuh-modulesd:agent-upgrade: INFO: (8153): Module Agent Upgrade started.
+2026/10/28 11:51:53 wazuh-modulesd:ciscat: INFO: Module disabled. Exiting...
+2026/10/28 11:51:53 wazuh-modulesd:osquery: INFO: Module disabled. Exiting...
+2026/10/28 11:51:53 sca: INFO: Module started.
+2026/10/28 11:51:53 sca: INFO: Loaded policy '/var/ossec/ruleset/sca/cis_ubuntu22-04.yml'
+2026/10/28 11:51:53 sca: INFO: Starting Security Configuration Assessment scan.
+2026/10/28 11:51:53 wazuh-modulesd:control: INFO: Starting control thread.
+2026/10/28 11:51:53 wazuh-modulesd:syscollector: INFO: Module started.
+2026/10/28 11:51:53 wazuh-modulesd:syscollector: INFO: Starting evaluation.
+2026/10/28 11:51:53 sca: INFO: Skipping policy '/var/ossec/ruleset/sca/cis_ubuntu22-04.yml': 'Check Ubuntu version.'
+2026/10/28 11:51:53 sca: INFO: Security Configuration Assessment scan finished. Duration: 0 seconds.
+2026/10/28 11:51:54 wazuh-modulesd:syscollector: INFO: Evaluation finished.
+2026/10/28 11:51:55 wazuh-logcollector: INFO: (9203): Monitoring journal entries.
+2026/10/28 11:51:59 wazuh-syscheckd: INFO: (6009): File integrity monitoring scan ended.
+2026/10/28 11:51:59 wazuh-syscheckd: INFO: FIM sync module started.
+===== manager 1514 =====
+manager_1514_open
+PING 192.168.221.138 (192.168.221.138) 56(84) bytes of data.
+64 bytes from 192.168.221.138: icmp_seq=1 ttl=64 time=2.22 ms
+
+--- 192.168.221.138 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 2.217/2.217/2.217/0.000 ms
+===== keys =====
+4 85 001 suricata-ids
+DONE

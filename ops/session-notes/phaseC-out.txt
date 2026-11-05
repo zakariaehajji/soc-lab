@@ -1,0 +1,13 @@
+[sudo: authenticate] Password: 
+BACKUP=/root/ossec.conf.pre-prolog-fix-20261028-115108
+===== Strip XML prolog + ensure trailing newline =====
+prolog_removed=1
+newline_added=True
+size=5009 prolog=False nl_end=False head=b'<ossec_config>\n  <client>\n    <server>\n '
+===== Config tests =====
+agentd_exit=0
+logcollector_exit=0
+modulesd_exit=0
+syscheckd_exit=0
+execd_exit=0
+REPAIR_FAILED restoring backup

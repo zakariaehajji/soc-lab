@@ -1,0 +1,36 @@
+q1_bytes=16929
+total {'value': 286, 'relation': 'eq'}
+2026-10-28T11:57:33.639+0000 id 001 rule 5502 PAM: Login session closed. dec pam loc journald
+2026-10-28T11:57:33.639+0000 id 001 rule 5402 Successful sudo to ROOT executed. dec sudo loc journald
+2026-10-28T11:57:33.639+0000 id 001 rule 5502 PAM: Login session closed. dec pam loc journald
+2026-10-28T11:57:33.639+0000 id 001 rule 5402 Successful sudo to ROOT executed. dec sudo loc journald
+2026-10-28T11:57:33.639+0000 id 001 rule 5501 PAM: Login session opened. dec pam loc journald
+2026-10-28T11:57:33.597+0000 id 001 rule 5501 PAM: Login session opened. dec pam loc journald
+2026-10-28T11:57:25.617+0000 id 001 rule 5502 PAM: Login session closed. dec pam loc journald
+2026-10-28T11:57:25.614+0000 id 001 rule 5402 Successful sudo to ROOT executed. dec sudo loc journald
+2026-10-28T11:57:25.612+0000 id 001 rule 5501 PAM: Login session opened. dec pam loc journald
+2026-10-28T11:57:25.610+0000 id 001 rule 5502 PAM: Login session closed. dec pam loc journald
+2026-10-28T11:57:25.607+0000 id 001 rule 5402 Successful sudo to ROOT executed. dec sudo loc journald
+2026-10-28T11:57:25.606+0000 id 001 rule 5501 PAM: Login session opened. dec pam loc journald
+2026-10-28T11:57:25.603+0000 id 001 rule 5502 PAM: Login session closed. dec pam loc journald
+2026-10-28T11:57:25.600+0000 id 001 rule 5402 Successful sudo to ROOT executed. dec sudo loc journald
+2026-10-28T11:57:25.598+0000 id 001 rule 5501 PAM: Login session opened. dec pam loc journald
+q2_bytes=1172
+total {'value': 1, 'relation': 'eq'}
+2026-10-28T11:57:25.594+0000 suricata-ids Suricata: Alert - CURSOR LAB TEST Suricata alert for Wazuh forward 
+recent_total {'value': 472, 'relation': 'eq'}
+2026-10-28T11:57:33.639+0000 suricata-ids 001 5502 PAM: Login session closed.
+2026-10-28T11:57:33.639+0000 suricata-ids 001 5402 Successful sudo to ROOT executed.
+2026-10-28T11:57:33.639+0000 suricata-ids 001 5502 PAM: Login session closed.
+2026-10-28T11:57:33.639+0000 suricata-ids 001 5402 Successful sudo to ROOT executed.
+2026-10-28T11:57:33.639+0000 suricata-ids 001 5501 PAM: Login session opened.
+2026-10-28T11:57:33.597+0000 suricata-ids 001 5501 PAM: Login session opened.
+2026-10-28T11:57:25.617+0000 suricata-ids 001 5502 PAM: Login session closed.
+2026-10-28T11:57:25.614+0000 suricata-ids 001 5402 Successful sudo to ROOT executed.
+monitoring_total {'value': 7, 'relation': 'eq'}
+{'timestamp': '2026-10-28T11:45:00.451Z', 'name': 'suricata-ids', 'id': '001', 'status': 'disconnected', 'ip': '192.168.221.136', 'version': 'Wazuh v4.14.9'}
+{'timestamp': '2026-10-28T11:30:01.440Z', 'name': 'suricata-ids', 'id': '001', 'status': 'disconnected', 'ip': '192.168.221.136', 'version': 'Wazuh v4.14.9'}
+{'timestamp': '2026-10-28T11:15:01.543Z', 'name': 'suricata-ids', 'id': '001', 'status': 'disconnected', 'ip': '192.168.221.136', 'version': 'Wazuh v4.14.9'}
+{'timestamp': '2026-10-28T11:00:00.587Z', 'name': 'suricata-ids', 'id': '001', 'status': 'disconnected', 'ip': '192.168.221.136', 'version': 'Wazuh v4.14.9'}
+{'timestamp': '2026-10-28T10:45:00.437Z', 'name': 'suricata-ids', 'id': '001', 'status': 'disconnected', 'ip': '192.168.221.136', 'version': 'Wazuh v4.14.9'}
+DONE

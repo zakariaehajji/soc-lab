@@ -1,0 +1,44 @@
+===== nmap harmless SYN scan =====
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-28 07:54 -0400
+Nmap scan report for 192.168.221.136
+Host is up (0.0017s latency).
+
+PORT     STATE  SERVICE
+21/tcp   closed ftp
+22/tcp   closed ssh
+23/tcp   closed telnet
+25/tcp   closed smtp
+53/tcp   closed domain
+80/tcp   closed http
+110/tcp  closed pop3
+111/tcp  closed rpcbind
+135/tcp  closed msrpc
+139/tcp  closed netbios-ssn
+143/tcp  closed imap
+443/tcp  closed https
+445/tcp  closed microsoft-ds
+993/tcp  closed imaps
+995/tcp  closed pop3s
+1723/tcp closed pptp
+3306/tcp closed mysql
+3389/tcp closed ms-wbt-server
+5900/tcp closed vnc
+8080/tcp closed http-proxy
+MAC Address: 00:0C:29:70:C2:91 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.87 seconds
+===== wazuh API agents =====
+TRY https://192.168.221.138:55000
+token_len=0
+TRY https://192.168.221.137:55000
+token_len=0
+TRY https://192.168.221.40:55000
+token_len=0
+KALI_DONE
+[sudo: authenticate] Password: 
+sudo: Authentication failed, try again.
+[sudo: authenticate] Password: 
+sudo: Authentication failed, try again.
+[sudo: authenticate] Password: 
+sudo: maximum 3 incorrect authentication attempts
+DONE

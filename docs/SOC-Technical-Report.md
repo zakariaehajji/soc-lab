@@ -52,11 +52,11 @@ Pre-existing installation retained. Notes:
 - Minimal change: `HTTP_PORTS` includes `8080` (backup taken)
 - EVE output active at `/var/log/suricata/eve.json`
 
-Details: [`../suricata/configuration-notes.md`](../suricata/configuration-notes.md)
+Details: [`../detection/suricata/configuration-notes.md`](../detection/suricata/configuration-notes.md)
 
 ## 7. Custom Suricata rules
 
-File: [`../suricata/local.rules`](../suricata/local.rules)
+File: [`../detection/suricata/local.rules`](../detection/suricata/local.rules)
 
 Coverage:
 
@@ -97,7 +97,7 @@ See [Test-Results.md](Test-Results.md) and:
 
 ## 14. Wazuh custom rules
 
-File: [`../wazuh/local_rules.xml`](../wazuh/local_rules.xml)
+File: [`../detection/wazuh/local_rules.xml`](../detection/wazuh/local_rules.xml)
 
 | Rule ID | Level | Purpose |
 |---------|-------|---------|
