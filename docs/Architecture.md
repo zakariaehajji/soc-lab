@@ -7,6 +7,7 @@
 3. **Analyzer (Wazuh manager):** Decodes Suricata JSON (base rule 86601) and applies custom SOC-LAB rules (`100101+`).
 4. **Storage (Indexer):** Stores alerts in `wazuh-alerts-*`.
 5. **Presentation (Dashboard):** Threat Hunting + dedicated `SOC Lab Monitoring` dashboard.
+6. **ML engine (`:8088`):** Bridge scores live Suricata/Wazuh alerts (`POST /score`). Friend's CIC-IDS2017 XGBoost stack is also available as research scoring (`POST /score/cic`).
 
 ## Trust boundaries
 

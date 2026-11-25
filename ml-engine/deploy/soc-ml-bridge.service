@@ -1,16 +1,20 @@
 [Unit]
-Description=SOC ML enrichment bridge (Indexer -> FastAPI)
-After=soc-ml.service
-Requires=soc-ml.service
+Description=SOC ML Indexer Bridge
+After=network.target soc-ml-api.service
+Requires=soc-ml-api.service
 
 [Service]
 Type=simple
-User=root
-WorkingDirectory=/opt/soc-ml-engine
-EnvironmentFile=-/opt/soc-ml-engine/.env
-ExecStart=/opt/soc-ml-engine/.venv/bin/python -m src.bridge --interval 15
+WorkingDirectory=/opt/ml-engine
+EnvironmentFile=-/opt/ml-engine/.env
+Environment=PYTHONPATH=/opt/ml-engine
+Environment=WAZUH_INDEXER_URL=https://127.0.0.1:9200
+Environment=WAZUH_INDEXER_USER=admin
+Environment=SOC_ML_API=http://127.0.0.1:8088
+# WAZUH_INDEXER_PASSWORD must come from /opt/ml-engine/.env — never hardcode here
+ExecStart=/opt/ml-engine/.venv/bin/python -m src.bridge --out /opt/ml-engine/logs/enrichment.jsonl --interval 20
 Restart=always
-RestartSec=5
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target

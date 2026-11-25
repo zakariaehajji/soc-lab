@@ -1,7 +1,14 @@
-# ML Engine — AI-Powered SOC (lab-native)
+# ML Engine — AI-Powered SOC
 
 Modular scoring service for the Wazuh 4.14.9 + Suricata 8.0.7 lab.  
 **Does not modify** live SIEM/IDS configs. Enrichment is additive (API + JSONL).
+
+Two scoring paths:
+
+| Path | Features | Model | Endpoint |
+|------|----------|-------|----------|
+| **Live lab** | Suricata/Wazuh-derived (22) | `artifacts/model.joblib` | `POST /score` |
+| **CIC research** (pfe-soc-ml) | CIC-IDS2017 flow columns | `artifacts/cic/xgb_*.json` | `POST /score/cic` |
 
 ## Lab endpoints
 
@@ -25,11 +32,11 @@ curl -s http://127.0.0.1:8088/health
 tail -f /opt/ml-engine/logs/enrichment.jsonl
 ```
 
-## API contract
+## API contract (live lab)
 
-- `GET /health` — model loaded + version  
-- `GET /schema` — feature names + request/response JSON schema  
-- `POST /score` — score one event  
+- `GET /health` — lab model + CIC readiness  
+- `GET /schema` — lab feature names + request/response JSON schema  
+- `POST /score` — score one Suricata/Wazuh event  
 - `POST /score/batch` — score list  
 
 ### Request (`ScoreRequest`)
@@ -67,9 +74,24 @@ Pass either raw `event` **or** precomputed `features` (22 lab-native floats).
 
 `hour_utc`, proto one-hots, `src_is_kali`, `dst_is_ids`/`dst_is_soc`, ports, `alert_priority`, SID/family flags (`nmap`/`web`/`icmp`/`other`), `sig_len`, flow packet/byte counters.
 
-**CIC-IDS columns are research-only** (notebooks). Live path uses Suricata/Wazuh-derived features only.
+## CIC research API (friend final work — pfe-soc-ml)
 
-## Local (Windows) retrain / smoke
+Integrated models + config from Zakaria's deliverable.
+
+- `GET /cic/schema` — `robuste` / `complet` feature lists  
+- `POST /score/cic` — score one CIC flow feature map  
+- `POST /score/cic/batch` — score many flows  
+
+Risk levels (0–100): **Faible** &lt;10 · **Moyen** &lt;30 · **Élevé** &lt;90 · **Critique** ≥90
+
+```powershell
+cd C:\Users\Pc\Desktop\work\SOC-PROJECT\ml-engine
+.\.venv\Scripts\activate
+$env:PYTHONPATH = (Get-Location).Path
+python -m src.score_cic_cli --variant robuste --n 500 --json
+```
+
+## Local (Windows) retrain / smoke (lab-native)
 
 ```powershell
 cd C:\Users\Pc\Desktop\work\SOC-PROJECT\ml-engine
@@ -94,19 +116,26 @@ python -m src.train --data lab_training.csv --outdir artifacts
 systemctl restart soc-ml-api
 ```
 
-## Notebooks (offline research)
+## Notebooks
 
-- `notebooks/01_eda_completed.ipynb` — CIC EDA (optional)
-- Live SOC scoring does **not** depend on CIC CSVs
+- `notebooks/01_eda_completed.ipynb` — earlier CIC EDA draft  
+- `notebooks/cic/01_eda.ipynb` — friend's final EDA  
+- `notebooks/cic/02_preprocessing_baseline.ipynb` — RF / XGBoost training  
+- `notebooks/cic/03_scoring_validation.ipynb` — score + risk-level validation  
+
+Live SOC scoring does **not** depend on CIC CSVs.
 
 ## Layout
 
 ```
 ml-engine/
-  src/           # features, train, api, bridge, collect, synthesize, schema
-  artifacts/     # model.joblib, model_multiclass.joblib, metrics.json
-  data/processed/
-  logs/          # enrichment.jsonl (on SOC: /opt/ml-engine/logs/)
+  src/                 # lab features/train/api/bridge + cic_scoring
+  artifacts/           # lab model.joblib + multiclass
+  artifacts/cic/       # friend's XGBoost + config.json
+  data/processed/      # lab training CSVs
+  data/cic/            # junctions to pfe-soc-ml raw/processed
+  notebooks/cic/       # friend's notebooks
+  logs/                # enrichment.jsonl (on SOC: /opt/ml-engine/logs/)
 ```
 
 ## Safety
@@ -115,3 +144,4 @@ ml-engine/
 - No Suricata rule edits from this module  
 - Bridge is read-only against the indexer; writes only local JSONL enrichment  
 - Keep indexer password in systemd unit / env — never commit it  
+- CIC path is additive research scoring only  

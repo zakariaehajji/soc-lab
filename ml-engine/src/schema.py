@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional  # Any used by CIC feature maps
 
 from pydantic import BaseModel, Field
 
@@ -41,6 +41,33 @@ class ScoreResponse(BaseModel):
     explanations: List[Explanation] = []
     notes: Optional[str] = None
     features_used: Optional[Dict[str, float]] = None
+
+
+class CicScoreRequest(BaseModel):
+    """CIC-IDS2017 flow scoring (research path from pfe-soc-ml)."""
+
+    request_id: str = Field(..., description="Caller correlation id")
+    variant: Literal["robuste", "complet"] = "robuste"
+    features: Dict[str, Any] = Field(..., description="CIC flow feature map")
+
+
+class CicScoreBatchRequest(BaseModel):
+    request_id: str
+    variant: Literal["robuste", "complet"] = "robuste"
+    flows: List[Dict[str, Any]] = Field(..., min_length=1)
+
+
+class CicScoreResponse(BaseModel):
+    request_id: str
+    model_version: str
+    variant: str
+    prediction: Literal["BENIGN", "ATTACK"]
+    risk_score: float
+    risk_score_0_100: float
+    risk_level: str
+    label_proba: Dict[str, float]
+    feature_count: int
+    notes: Optional[str] = None
 
 
 # Feature vector keys expected by the lab-native model (Suricata/Wazuh derived)

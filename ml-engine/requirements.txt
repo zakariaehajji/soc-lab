@@ -8,3 +8,5 @@ joblib==1.4.2
 httpx==0.28.1
 python-dotenv==1.0.1
 requests==2.32.3
+xgboost>=2.0.0,<4.0.0
+pyarrow>=14.0.0

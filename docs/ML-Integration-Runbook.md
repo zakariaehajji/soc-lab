@@ -25,7 +25,35 @@ journalctl -u soc-ml-bridge -f
 - Enrichment: /opt/ml-engine/logs/enrichment.jsonl
 - Units: /etc/systemd/system/soc-ml-*.service
 
+## CIC research path (pfe-soc-ml — friend's final work)
+
+Integrated under `ml-engine/artifacts/cic` + `POST /score/cic`.
+Does **not** replace live Suricata/Wazuh scoring.
+
+```bash
+# health includes cic.ready
+curl -s http://127.0.0.1:8088/health | python3 -m json.tool
+
+# schema (feature lists robuste/complet)
+curl -s http://127.0.0.1:8088/cic/schema | python3 -m json.tool
+
+# score one CIC flow (features must match /cic/schema)
+curl -s -X POST http://127.0.0.1:8088/score/cic \
+  -H "Content-Type: application/json" \
+  -d '{"request_id":"cic-1","variant":"robuste","features":{}}'
+```
+
+Local Windows smoke (uses junctioned `data/cic/processed`):
+
+```powershell
+cd C:\Users\Pc\Desktop\work\SOC-PROJECT\ml-engine
+.\.venv\Scripts\activate
+$env:PYTHONPATH = (Get-Location).Path
+python -m src.score_cic_cli --variant robuste --n 500 --json
+```
+
 ## Notes
 - Additive only: SIEM/IDS configs unchanged
-- Features are Suricata/Wazuh-derived (not CIC)
+- Live features are Suricata/Wazuh-derived (not CIC)
+- CIC XGBoost is research/demo scoring for CIC-IDS2017 flow columns
 - Bridge polls indexer every 20s for SOC-LAB / LOCAL Suricata alerts

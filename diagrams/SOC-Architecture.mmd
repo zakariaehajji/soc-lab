@@ -19,5 +19,13 @@ flowchart LR
     I --> D["Wazuh Dashboard"]
   end
 
+  subgraph ML["ML engine :8088"]
+    BR["soc-ml-bridge"] --> LAB["POST /score<br/>lab-native RF"]
+    I --> BR
+    LAB --> ENR["enrichment.jsonl + /ui"]
+    CIC["POST /score/cic<br/>XGBoost CIC-IDS2017<br/>pfe-soc-ml"] -.->|research flows| ENR
+  end
+
   IDS --- PIPE
   SOC --- PIPE
+  SOC --- ML

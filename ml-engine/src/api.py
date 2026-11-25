@@ -16,16 +16,29 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
+from .cic_scoring import cic_ready, feature_names as cic_feature_names, load_model as load_cic_model, score_flows, score_one
 from .context import LAB_HOSTS, extract_context, lookup_host
 from .features import extract_features
 from .response import block_ip, is_protected, list_blocked, unblock_ip
-from .schema import FEATURE_NAMES, Explanation, ScoreRequest, ScoreResponse
+from .schema import (
+    FEATURE_NAMES,
+    CicScoreBatchRequest,
+    CicScoreRequest,
+    CicScoreResponse,
+    Explanation,
+    ScoreRequest,
+    ScoreResponse,
+)
 
 ARTIFACT = Path(os.getenv("SOC_ML_MODEL", "artifacts/model.joblib"))
 MULTI = Path(os.getenv("SOC_ML_MODEL_MULTI", "artifacts/model_multiclass.joblib"))
 ENRICHMENT = Path(os.getenv("SOC_ML_ENRICHMENT", "logs/enrichment.jsonl"))
 
-app = FastAPI(title="SOC ML Engine", version="0.2.0", description="Modular ML scoring + lab response actions")
+app = FastAPI(
+    title="SOC ML Engine",
+    version="0.3.0",
+    description="Lab-native Suricata/Wazuh scoring + CIC-IDS2017 research scoring (pfe-soc-ml)",
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -35,6 +48,7 @@ app.add_middleware(
 
 _BUNDLE = None
 _MULTI = None
+_CIC_STATUS: Dict[str, Any] = {"ready": False}
 
 
 class BlockRequest(BaseModel):
@@ -44,12 +58,19 @@ class BlockRequest(BaseModel):
 
 
 def load_models():
-    global _BUNDLE, _MULTI
+    global _BUNDLE, _MULTI, _CIC_STATUS
     if not ARTIFACT.exists():
         raise FileNotFoundError(f"Model not found: {ARTIFACT}")
     _BUNDLE = joblib.load(ARTIFACT)
     if MULTI.exists():
         _MULTI = joblib.load(MULTI)
+    try:
+        _CIC_STATUS = cic_ready()
+        if _CIC_STATUS.get("ready"):
+            load_cic_model("robuste")
+            load_cic_model("complet")
+    except Exception as e:
+        _CIC_STATUS = {"ready": False, "error": str(e)}
 
 
 @app.on_event("startup")
@@ -91,8 +112,12 @@ def root():
             "block": "POST /block",
             "unblock": "POST /unblock",
             "score": "POST /score",
+            "score_cic": "POST /score/cic",
+            "score_cic_batch": "POST /score/cic/batch",
+            "cic_schema": "GET /cic/schema",
             "docs": "/docs",
         },
+        "cic_ready": bool((_CIC_STATUS or {}).get("ready")),
     }
 
 
@@ -325,6 +350,7 @@ def health():
         "model_loaded": _BUNDLE is not None,
         "model_version": (_BUNDLE or {}).get("version"),
         "feature_count": len(FEATURE_NAMES),
+        "cic": _CIC_STATUS,
     }
 
 
@@ -334,6 +360,64 @@ def schema():
         "features": FEATURE_NAMES,
         "request": ScoreRequest.model_json_schema(),
         "response": ScoreResponse.model_json_schema(),
+    }
+
+
+@app.get("/cic/schema")
+def cic_schema():
+    if not (_CIC_STATUS or {}).get("ready"):
+        raise HTTPException(503, f"CIC research stack not ready: {_CIC_STATUS}")
+    return {
+        "variants": {
+            "robuste": cic_feature_names("robuste"),
+            "complet": cic_feature_names("complet"),
+        },
+        "request": CicScoreRequest.model_json_schema(),
+        "response": CicScoreResponse.model_json_schema(),
+        "status": _CIC_STATUS,
+    }
+
+
+@app.post("/score/cic", response_model=CicScoreResponse)
+def score_cic(req: CicScoreRequest):
+    if not (_CIC_STATUS or {}).get("ready"):
+        raise HTTPException(503, f"CIC research stack not ready: {_CIC_STATUS}")
+    try:
+        scored = score_one(req.features, variant=req.variant)
+    except ValueError as e:
+        raise HTTPException(400, str(e)) from e
+    except Exception as e:
+        raise HTTPException(500, f"CIC scoring failed: {e}") from e
+    return CicScoreResponse(request_id=req.request_id, **scored)
+
+
+@app.post("/score/cic/batch")
+def score_cic_batch(req: CicScoreBatchRequest):
+    if not (_CIC_STATUS or {}).get("ready"):
+        raise HTTPException(503, f"CIC research stack not ready: {_CIC_STATUS}")
+    try:
+        out = score_flows(req.flows, variant=req.variant)
+    except ValueError as e:
+        raise HTTPException(400, str(e)) from e
+    except Exception as e:
+        raise HTTPException(500, f"CIC batch scoring failed: {e}") from e
+    rows = []
+    for i, row in out.iterrows():
+        rows.append(
+            {
+                "index": int(i) if isinstance(i, (int, np.integer)) else i,
+                "prediction": row["prediction"],
+                "risk_score": float(row["proba_attack"]),
+                "risk_score_0_100": float(row["score"]),
+                "risk_level": row["niveau"],
+            }
+        )
+    return {
+        "request_id": req.request_id,
+        "model_version": f"cic_xgb_{req.variant}_v1",
+        "variant": req.variant,
+        "count": len(rows),
+        "rows": rows,
     }
 
 

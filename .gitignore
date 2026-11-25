@@ -16,6 +16,8 @@ ml-engine/.venv/
 *_pass*
 secrets/
 .private/
+ops/lab-inventory.env
+ml-engine/.env
 
 # Deploy scratch / remote helper scripts
 ml-engine/deploy_bundle/
@@ -40,5 +42,12 @@ Desktop.ini
 
 # Large raw datasets (keep processed samples optional)
 ml-engine/data/raw/
+ml-engine/data/cic/raw/
+ml-engine/data/cic/processed/
+# Windows junctions / duplicates of artifacts/cic
+ml-engine/models/
+*.parquet
 *.pcap
 *.pcapng
+# Optional heavy CIC baseline (XGBoost JSON models are enough)
+ml-engine/artifacts/cic/RandomForest.joblib
